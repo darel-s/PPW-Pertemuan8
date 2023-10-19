@@ -13,3 +13,4 @@ Route::post('/buku', [ControllerBuku::class, 'store'])->name('buku.store');
 Route::delete('/buku/{id}', [ControllerBuku::class, 'destroy'])->name('buku.destroy');
 Route::get('/buku/edit/{id}', [ControllerBuku::class, 'edit'])->name('buku.edit');
 Route::post('/buku/update/{id}', [ControllerBuku::class, 'update'])->name('buku.update');
+Route::get('/buku/search', [ControllerBuku::class, 'search'])->name('buku.search');

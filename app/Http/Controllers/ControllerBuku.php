@@ -80,8 +80,9 @@ class ControllerBuku extends Controller
         $total_harga = DB::table('buku')->sum('harga');
         $jumlah_buku = $data_buku->count();
     
-        return view('buku.index', compact('data_buku', 'total_harga', 'no', 'jumlah_buku'));
+        return view('buku.search', compact('data_buku', 'total_harga', 'no', 'jumlah_buku', 'cari'));
     }
+    
     
     
 }

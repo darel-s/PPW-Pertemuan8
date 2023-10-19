@@ -8,21 +8,20 @@
     <div class="bg-green-200 text-green-800 p-4 my-4 rounded-lg shadow-md">
         {{ Session::get('pesan') }}
     </div>
-@endif
+    @endif
 
-@if(Session::has('delete'))
+    @if(Session::has('delete'))
     <div class="bg-red-200 text-red-800 p-4 my-4 rounded-lg shadow-md">
         {{ Session::get('delete') }}
     </div>
-@endif
-
+    @endif
 
     <title>Data Buku</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body class="bg-gray-100">
     <div class="container mx-auto mt-10 p-4">
-        <h1 class="text-3xl font-semibold text-center mb-6 bg-gray-200 py-2">Daftar Buku</h1>
+        <h1 class="text-3xl font-semibold text-center mb-6 bg-gray-200 py-2">Hasil Pencarian Buku</h1>
         <div class="mt-4 mb-4 p-4 bg-white shadow-md flex items-center justify-between">
             <a href="{{ route('buku.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Tambah Buku</a>
             <form action="{{ route('buku.search') }}" method="GET" class="flex items-center">
@@ -31,6 +30,17 @@
                 <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white rounded-r px-4 py-2">Cari</button>
             </form>
         </div>
+
+        @if (count($data_buku))
+        <div class="alert alert-success">
+            Ditemukan <strong>{{ count($data_buku) }}</strong> data dengan kata: <strong>{{ $cari }}</strong>
+        </div>
+        @else
+        <div class="alert alert-warning">
+            <h4>Data {{ $cari }} tidak ditemukan</h4> <a href="/buku">Kembali ke Daftar Buku</a>
+        </div>
+        @endif
+
         <table class="w-full border-collapse border border-gray-300 bg-white shadow-md">
             <thead class="bg-gray-200">
                 <tr>
@@ -65,13 +75,6 @@
                 @endforeach
             </tbody>
         </table>
-        <div class="mt-4">
-            {{ $data_buku->links() }}
-        </div>
-        <div class="mt-6 p-4 bg-white shadow-md">
-            <p class="text-lg">Jumlah buku yang tersedia: {{ $jumlah_buku }}</p>
-            <p class="text-lg">Total harga dari seluruh buku: Rp {{ number_format($total_harga, 2) }}</p>
-        </div>
     </div>
 </body>
 </html>
